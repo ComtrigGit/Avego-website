@@ -69,6 +69,22 @@
     /* Smooth hover transitions */
     a, button { transition: all 0.3s ease; }
   </style>
+
+    <style>
+      /* ── Responsive image containers ── */
+      .img-cat     { aspect-ratio: 3/4; }
+      .img-product { aspect-ratio: 1/1; }
+      .img-bundle  { aspect-ratio: 16/9; }
+      .img-hiw     { aspect-ratio: 16/9; overflow: hidden; border-radius: 0.75rem; margin-top: 4rem; }
+      .img-hiw img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+      .img-founder { aspect-ratio: 3/4; }
+
+      @media (max-width: 767px) {
+        .img-cat    { aspect-ratio: 4/3; }
+        .img-bundle { aspect-ratio: 4/3; }
+        .img-hiw    { aspect-ratio: 4/3; margin-top: 2rem; }
+      }
+    </style>
 </head>
 <body class="min-h-screen bg-[#FAFAFA] text-[#2C3B2E]">
 
@@ -185,7 +201,7 @@
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
         <!-- Category card: Growing Kits -->
-        <a href="#" class="group relative block overflow-hidden rounded-lg bg-[#E8E6DF]" style="aspect-ratio:3/4;">
+        <a href="#" class="img-cat group relative block overflow-hidden rounded-lg bg-[#E8E6DF]">
           <img src="images/avergo-kits.jpg" alt="Growing Kits" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
           <div class="absolute inset-0" style="background:linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%); opacity:0.6;"></div>
           <div class="absolute bottom-0 left-0 p-8 w-full flex justify-between items-end">
@@ -196,7 +212,7 @@
           </div>
         </a>
         <!-- Category card: Wall Planters -->
-        <a href="#" class="group relative block overflow-hidden rounded-lg bg-[#E8E6DF]" style="aspect-ratio:3/4;">
+        <a href="#" class="img-cat group relative block overflow-hidden rounded-lg bg-[#E8E6DF]">
           <img src="images/avergo-planters.jpg" alt="Wall Planters" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
           <div class="absolute inset-0" style="background:linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%); opacity:0.6;"></div>
           <div class="absolute bottom-0 left-0 p-8 w-full flex justify-between items-end">
@@ -207,7 +223,7 @@
           </div>
         </a>
         <!-- Category card: Accessories -->
-        <a href="#" class="group relative block overflow-hidden rounded-lg bg-[#E8E6DF]" style="aspect-ratio:3/4;">
+        <a href="#" class="img-cat group relative block overflow-hidden rounded-lg bg-[#E8E6DF]">
           <img src="images/avergo-accessories.jpg" alt="Accessories" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
           <div class="absolute inset-0" style="background:linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%); opacity:0.6;"></div>
           <div class="absolute bottom-0 left-0 p-8 w-full flex justify-between items-end">
@@ -238,7 +254,7 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
         <!-- Product 1 -->
         <div class="group cursor-pointer">
-          <div class="overflow-hidden rounded-lg mb-6 bg-white relative" style="aspect-ratio:1/1;">
+          <div class="img-product overflow-hidden rounded-lg mb-6 bg-white relative">
             <img src="images/avergo-product-bonsai.jpg" alt="Japanese Maple Bonsai Kit" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" />
             <div class="absolute bottom-4 left-0 right-0 flex justify-center">
               <button class="bg-white text-[#2C3B2E] px-6 py-3 rounded-full text-sm uppercase tracking-widest font-medium shadow-lg hover:bg-[#2C3B2E] hover:text-white">Quick Add</button>
@@ -254,7 +270,7 @@
         </div>
         <!-- Product 2 -->
         <div class="group cursor-pointer">
-          <div class="overflow-hidden rounded-lg mb-6 bg-white relative" style="aspect-ratio:1/1;">
+          <div class="img-product overflow-hidden rounded-lg mb-6 bg-white relative">
             <img src="images/avergo-product-herb.jpg" alt="Culinary Herb Trio" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" />
             <div class="absolute bottom-4 left-0 right-0 flex justify-center">
               <button class="bg-white text-[#2C3B2E] px-6 py-3 rounded-full text-sm uppercase tracking-widest font-medium shadow-lg hover:bg-[#2C3B2E] hover:text-white">Quick Add</button>
@@ -270,7 +286,7 @@
         </div>
         <!-- Product 3 -->
         <div class="group cursor-pointer">
-          <div class="overflow-hidden rounded-lg mb-6 bg-white relative" style="aspect-ratio:1/1;">
+          <div class="img-product overflow-hidden rounded-lg mb-6 bg-white relative">
             <img src="images/avergo-product-planter.jpg" alt="Walnut Hexagon Planter" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" />
             <div class="absolute bottom-4 left-0 right-0 flex justify-center">
               <button class="bg-white text-[#2C3B2E] px-6 py-3 rounded-full text-sm uppercase tracking-widest font-medium shadow-lg hover:bg-[#2C3B2E] hover:text-white">Quick Add</button>
@@ -358,7 +374,7 @@
       </div>
       <!-- Image + CTA -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-        <div class="overflow-hidden rounded-xl" style="aspect-ratio:16/9;">
+        <div class="img-bundle overflow-hidden rounded-xl">
           <img src="images/avergo-bundle.jpg" alt="The Avergo Starter Bundle" class="w-full h-full object-cover" />
         </div>
         <div class="lg:pl-6">
@@ -412,8 +428,8 @@
           <p class="text-sm leading-relaxed max-w-xs" style="color:rgba(44,59,46,0.65);">With our grow light and stand, your plant gets perfect light year-round. You just enjoy the process.</p>
         </div>
       </div>
-      <div class="mt-16 overflow-hidden rounded-xl">
-        <img src="images/avergo-how-it-works.jpg" alt="Planting a bonsai seedling" class="w-full object-cover" style="height:20rem;" />
+      <div class="img-hiw">
+        <img src="images/avergo-how-it-works.jpg" alt="How to grow your kit" />
       </div>
     </div>
   </section>
@@ -503,7 +519,7 @@
     <div class="max-w-7xl mx-auto px-6 md:px-12">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div class="relative">
-          <div class="overflow-hidden rounded-lg" style="aspect-ratio:3/4;">
+          <div class="img-founder overflow-hidden rounded-lg">
             <img src="images/avergo-founder.jpg" alt="Leila Nasser, founder of Avergo" class="w-full h-full object-cover" />
           </div>
           <!-- Floating quote card (desktop) -->
