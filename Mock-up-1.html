@@ -171,15 +171,15 @@ img { max-width: 100%; display: block; }
   font-weight: 500;
 }
 .hero-image {
-  background: rgba(255,255,255,0.08);
   border-radius: 24px;
   height: 420px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  color: rgba(255,255,255,0.5);
-  border: 2px dashed rgba(255,255,255,0.15);
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+}
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* ---- TRUST BAR ---- */
@@ -252,11 +252,17 @@ img { max-width: 100%; display: block; }
 .product-img {
   height: 260px;
   background: var(--sage-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 40px;
   position: relative;
+  overflow: hidden;
+}
+.product-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.product-card:hover .product-img img {
+  transform: scale(1.06);
 }
 .product-badge {
   position: absolute;
@@ -321,14 +327,15 @@ img { max-width: 100%; display: block; }
   align-items: center;
 }
 .story-image {
-  background: var(--sage-light);
   border-radius: 24px;
   height: 450px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--warm-gray);
-  border: 2px dashed var(--sage);
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+}
+.story-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .story-text h2 {
   font-size: 36px;
@@ -408,14 +415,15 @@ img { max-width: 100%; display: block; }
 }
 .bundle-card.accent .bundle-cta { color: var(--terracotta); }
 .bundle-img {
-  background: rgba(255,255,255,0.1);
   border-radius: 16px;
   height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255,255,255,0.4);
-  border: 2px dashed rgba(255,255,255,0.2);
+  overflow: hidden;
+}
+.bundle-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
 }
 
 /* ---- HOW IT WORKS ---- */
@@ -477,10 +485,16 @@ img { max-width: 100%; display: block; }
 .catalog-img {
   height: 180px;
   background: var(--sage-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
+  overflow: hidden;
+}
+.catalog-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.catalog-card:hover .catalog-img img {
+  transform: scale(1.06);
 }
 .catalog-info {
   padding: 16px;
@@ -662,7 +676,7 @@ img { max-width: 100%; display: block; }
       <a href="#bestsellers" class="hero-cta">Shop Best Sellers</a>
       <span class="hero-badge">4.5+ Stars &nbsp;|&nbsp; 50,000+ Reviews</span>
     </div>
-    <div class="hero-image">[ Hero lifestyle image: hands planting bonsai seeds on warm wooden table ]</div>
+    <div class="hero-image"><img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=800&q=80" alt="Hands planting seeds on a warm wooden table with seedlings"></div>
   </div>
 </section>
 
@@ -700,7 +714,7 @@ img { max-width: 100%; display: block; }
       <div class="product-card">
         <div class="product-img">
           <span class="product-badge">#1 Best Seller</span>
-          🌳
+          <img src="https://images.unsplash.com/photo-1599598177991-ec67b5c37318?w=600&q=80" alt="Bonsai tree in ceramic pot">
         </div>
         <div class="product-info">
           <h3>Bonsai Tree Growing Kit</h3>
@@ -716,7 +730,7 @@ img { max-width: 100%; display: block; }
       <div class="product-card">
         <div class="product-img">
           <span class="product-badge">Fan Favorite</span>
-          🌿
+          <img src="https://images.unsplash.com/photo-1515023115894-bacee5b91f71?w=600&q=80" alt="Fresh herbs growing in pots">
         </div>
         <div class="product-info">
           <h3>Herb Garden Growing Kit</h3>
@@ -732,7 +746,7 @@ img { max-width: 100%; display: block; }
       <div class="product-card">
         <div class="product-img">
           <span class="product-badge">Trending</span>
-          🌱
+          <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=600&q=80" alt="Modern wall planters with trailing greenery">
         </div>
         <div class="product-info">
           <h3>Wall Planter Set</h3>
@@ -748,7 +762,7 @@ img { max-width: 100%; display: block; }
       <div class="product-card">
         <div class="product-img">
           <span class="product-badge">Gift Pick</span>
-          🌸
+          <img src="https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=600&q=80" alt="Colorful flowers blooming in garden">
         </div>
         <div class="product-info">
           <h3>Flower Growing Kit</h3>
@@ -768,7 +782,7 @@ img { max-width: 100%; display: block; }
 <!-- ======== BRAND STORY ======== -->
 <section class="brand-story" id="story">
   <div class="container">
-    <div class="story-image">[ Photo: founder at a sunlit workbench surrounded by growing kits and young seedlings ]</div>
+    <div class="story-image"><img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80" alt="Sunlit workbench with seedlings and growing supplies"></div>
     <div class="story-text">
       <h2>I Killed Every Plant I Touched. So I Built Something Better.</h2>
       <p>It started with a dead cactus. Then a basil plant that didn't last a week. I loved the idea of growing things, but nothing I tried ever worked — bad soil, wrong seeds, confusing instructions.</p>
@@ -796,7 +810,7 @@ img { max-width: 100%; display: block; }
           <div class="bundle-price">$89.97 <span class="was">$124.85</span></div>
           <a href="#" class="bundle-cta">Shop Bundle — Save 28%</a>
         </div>
-        <div class="bundle-img">[ 5 products arranged beautifully ]</div>
+        <div class="bundle-img"><img src="https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=600&q=80" alt="Collection of growing kits and plants arranged on wooden surface"></div>
       </div>
 
       <div class="bundle-card accent">
@@ -806,7 +820,7 @@ img { max-width: 100%; display: block; }
           <div class="bundle-price">$64.97 <span class="was">$82.88</span></div>
           <a href="#" class="bundle-cta">Shop Gift Bundle — Save 22%</a>
         </div>
-        <div class="bundle-img">[ Gift-wrapped bundle display ]</div>
+        <div class="bundle-img"><img src="https://images.unsplash.com/photo-1457530378978-8bac673b8062?w=600&q=80" alt="Beautifully wrapped gift box with plants"></div>
       </div>
 
     </div>
@@ -854,56 +868,56 @@ img { max-width: 100%; display: block; }
     </div>
     <div class="catalog-grid">
       <div class="catalog-card">
-        <div class="catalog-img">🐱</div>
+        <div class="catalog-img"><img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400&q=80" alt="Cat with fresh cat grass"></div>
         <div class="catalog-info">
           <h3>Cat Grass Growing Kit</h3>
           <div class="price">$14.97</div>
         </div>
       </div>
       <div class="catalog-card">
-        <div class="catalog-img">💧</div>
+        <div class="catalog-img"><img src="https://images.unsplash.com/photo-1620127682229-33388276e540?w=400&q=80" alt="Glass watering globes for plants"></div>
         <div class="catalog-info">
           <h3>Self-Watering Globes (4pk)</h3>
           <div class="price">$16.97</div>
         </div>
       </div>
       <div class="catalog-card">
-        <div class="catalog-img">💡</div>
+        <div class="catalog-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&q=80" alt="LED grow light illuminating seedlings"></div>
         <div class="catalog-info">
           <h3>LED Grow Light</h3>
           <div class="price">$22.97</div>
         </div>
       </div>
       <div class="catalog-card">
-        <div class="catalog-img">🪵</div>
+        <div class="catalog-img"><img src="https://images.unsplash.com/photo-1591958911259-bee2173bdccc?w=400&q=80" alt="Bamboo plant stand with pots"></div>
         <div class="catalog-info">
           <h3>Bamboo Kit Stand</h3>
           <div class="price">$19.97</div>
         </div>
       </div>
       <div class="catalog-card">
-        <div class="catalog-img">💡🪵</div>
+        <div class="catalog-img"><img src="https://images.unsplash.com/photo-1524247108137-732e0f642303?w=400&q=80" alt="Plant stand with integrated grow light"></div>
         <div class="catalog-info">
           <h3>Kit Stand with LED Light</h3>
           <div class="price">$34.97</div>
         </div>
       </div>
       <div class="catalog-card">
-        <div class="catalog-img">🌍</div>
+        <div class="catalog-img"><img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&q=80" alt="Rich coconut coir soil for planting"></div>
         <div class="catalog-info">
           <h3>Coconut Coir Soil (3pk)</h3>
           <div class="price">$12.97</div>
         </div>
       </div>
       <div class="catalog-card">
-        <div class="catalog-img">🏷️</div>
+        <div class="catalog-img"><img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&q=80" alt="Wooden plant markers in garden soil"></div>
         <div class="catalog-info">
           <h3>Wooden Plant Markers (25pk)</h3>
           <div class="price">$9.97</div>
         </div>
       </div>
       <div class="catalog-card">
-        <div class="catalog-img">📖</div>
+        <div class="catalog-img"><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&q=80" alt="The Grower's Handbook book"></div>
         <div class="catalog-info">
           <h3>The Grower's Handbook</h3>
           <div class="price">$14.97</div>
