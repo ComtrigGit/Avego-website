@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avergo — Grow Something Amazing</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #2D5016;
+  --green-light: #4A7A2E;
+  --green-dark: #1E3A0F;
+  --cream: #FBF7F0;
+  --cream-dark: #F0E8D8;
+  --terra: #C4704B;
+  --terra-light: #D4896A;
+  --charcoal: #1A1A1A;
+  --gray: #6B6B6B;
+  --gray-light: #E8E8E8;
+  --white: #FFFFFF;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter',sans-serif; color:var(--charcoal); background:var(--white); }
+h1,h2,h3,h4 { font-family:'Playfair Display',serif; }
+a { text-decoration:none; color:inherit; }
+img { max-width:100%; display:block; }
+.container { max-width:1200px; margin:0 auto; padding:0 24px; }
+
+/* ANNOUNCEMENT BAR */
+.announce { background:var(--green); color:var(--white); text-align:center; padding:10px; font-size:13px; font-weight:500; letter-spacing:0.5px; }
+.announce span { color:var(--terra-light); font-weight:700; }
+
+/* NAV */
+nav { background:var(--white); border-bottom:1px solid var(--gray-light); padding:16px 0; position:sticky; top:0; z-index:100; }
+nav .container { display:flex; align-items:center; justify-content:space-between; }
+.nav-logo { font-family:'Playfair Display',serif; font-size:28px; font-weight:700; color:var(--green); letter-spacing:1px; }
+.nav-logo span { color:var(--terra); }
+.nav-links { display:flex; gap:32px; align-items:center; }
+.nav-links a { font-size:14px; font-weight:500; color:var(--charcoal); transition:color 0.2s; }
+.nav-links a:hover { color:var(--green); }
+.nav-icons { display:flex; gap:20px; align-items:center; }
+.nav-icons a { font-size:14px; color:var(--charcoal); }
+.cart-badge { background:var(--terra); color:#fff; font-size:11px; border-radius:50%; width:18px; height:18px; display:inline-flex; align-items:center; justify-content:center; margin-left:-8px; margin-top:-8px; position:relative; top:-6px; }
+
+/* HERO */
+.hero { background: linear-gradient(135deg, var(--cream) 0%, var(--cream-dark) 100%); padding:80px 0; position:relative; overflow:hidden; }
+.hero .container { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+.hero-text { z-index:2; }
+.hero-badge { display:inline-block; background:var(--green); color:#fff; font-size:12px; font-weight:600; padding:6px 16px; border-radius:20px; margin-bottom:20px; letter-spacing:1px; text-transform:uppercase; }
+.hero h1 { font-size:52px; line-height:1.15; color:var(--green-dark); margin-bottom:20px; }
+.hero h1 em { color:var(--terra); font-style:normal; }
+.hero p { font-size:18px; color:var(--gray); line-height:1.7; margin-bottom:32px; max-width:480px; }
+.btn { display:inline-block; padding:16px 36px; border-radius:6px; font-size:15px; font-weight:600; transition:all 0.3s; cursor:pointer; border:none; }
+.btn-primary { background:var(--green); color:#fff; }
+.btn-primary:hover { background:var(--green-dark); transform:translateY(-2px); box-shadow:0 8px 24px rgba(45,80,22,0.3); }
+.btn-secondary { background:transparent; color:var(--green); border:2px solid var(--green); margin-left:12px; }
+.btn-secondary:hover { background:var(--green); color:#fff; }
+.hero-visual { position:relative; }
+.hero-img-main { width:100%; border-radius:16px; box-shadow:0 24px 64px rgba(0,0,0,0.12); background:var(--cream-dark); height:480px; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.hero-img-main .placeholder { text-align:center; color:var(--green); }
+.hero-img-main .placeholder .emoji { font-size:120px; }
+.hero-img-main .placeholder p { font-size:14px; margin-top:12px; color:var(--gray); }
+.hero-float { position:absolute; background:#fff; border-radius:12px; padding:16px 20px; box-shadow:0 8px 32px rgba(0,0,0,0.1); }
+.hero-float.reviews { bottom:40px; left:-30px; display:flex; align-items:center; gap:10px; }
+.hero-float.reviews .stars { color:#F5A623; font-size:16px; }
+.hero-float.reviews .rev-text { font-size:13px; color:var(--gray); }
+.hero-float.reviews .rev-text strong { color:var(--charcoal); display:block; }
+.hero-float.sold { top:40px; right:-20px; text-align:center; }
+.hero-float.sold .num { font-size:24px; font-weight:700; color:var(--green); font-family:'Playfair Display',serif; }
+.hero-float.sold .lbl { font-size:11px; color:var(--gray); text-transform:uppercase; letter-spacing:1px; }
+
+/* TRUST BAR */
+.trust-bar { background:var(--white); border-bottom:1px solid var(--gray-light); padding:24px 0; }
+.trust-bar .container { display:flex; justify-content:center; gap:48px; flex-wrap:wrap; }
+.trust-item { display:flex; align-items:center; gap:10px; font-size:14px; color:var(--gray); }
+.trust-icon { font-size:20px; }
+
+/* SECTION STYLES */
+.section { padding:80px 0; }
+.section-cream { background:var(--cream); }
+.section-title { text-align:center; margin-bottom:48px; }
+.section-title h2 { font-size:38px; color:var(--green-dark); margin-bottom:12px; }
+.section-title p { font-size:16px; color:var(--gray); max-width:600px; margin:0 auto; }
+.section-title .divider { width:60px; height:3px; background:var(--terra); margin:16px auto 0; border-radius:2px; }
+
+/* PRODUCT CARDS */
+.product-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:32px; }
+.product-card { background:#fff; border-radius:12px; overflow:hidden; transition:all 0.3s; border:1px solid var(--gray-light); }
+.product-card:hover { transform:translateY(-6px); box-shadow:0 16px 48px rgba(0,0,0,0.1); }
+.product-img { height:300px; background:var(--cream); display:flex; align-items:center; justify-content:center; position:relative; }
+.product-img .emoji { font-size:80px; }
+.product-badge { position:absolute; top:12px; left:12px; background:var(--terra); color:#fff; font-size:11px; font-weight:700; padding:4px 12px; border-radius:4px; text-transform:uppercase; }
+.product-badge.green { background:var(--green); }
+.product-info { padding:20px; }
+.product-info h3 { font-size:17px; font-weight:600; font-family:'Inter',sans-serif; margin-bottom:6px; line-height:1.4; }
+.product-info .price { font-size:20px; font-weight:700; color:var(--green); margin-bottom:4px; }
+.product-info .price .compare { font-size:14px; color:var(--gray); text-decoration:line-through; margin-left:8px; font-weight:400; }
+.product-info .rating { font-size:13px; color:#F5A623; margin-bottom:12px; }
+.product-info .rating span { color:var(--gray); margin-left:4px; }
+.product-btn { width:100%; padding:12px; background:var(--green); color:#fff; border:none; border-radius:6px; font-size:14px; font-weight:600; cursor:pointer; transition:background 0.2s; }
+.product-btn:hover { background:var(--green-dark); }
+
+/* BUNDLES */
+.bundle-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:32px; }
+.bundle-card { background:#fff; border:2px solid var(--gray-light); border-radius:16px; padding:32px; text-align:center; transition:all 0.3s; position:relative; }
+.bundle-card:hover { border-color:var(--green); }
+.bundle-card.featured { border-color:var(--terra); }
+.bundle-card.featured::before { content:'MOST POPULAR'; position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--terra); color:#fff; font-size:11px; font-weight:700; padding:4px 16px; border-radius:12px; letter-spacing:1px; }
+.bundle-emoji { font-size:60px; margin-bottom:16px; }
+.bundle-card h3 { font-size:22px; margin-bottom:8px; color:var(--green-dark); }
+.bundle-card .bundle-desc { font-size:14px; color:var(--gray); margin-bottom:16px; line-height:1.6; }
+.bundle-items { list-style:none; text-align:left; margin-bottom:20px; }
+.bundle-items li { padding:6px 0; font-size:13px; color:var(--charcoal); border-bottom:1px solid #f0f0f0; }
+.bundle-items li::before { content:'✓ '; color:var(--green); font-weight:700; }
+.bundle-price { margin-bottom:16px; }
+.bundle-price .current { font-size:32px; font-weight:700; color:var(--green); font-family:'Playfair Display',serif; }
+.bundle-price .was { font-size:14px; color:var(--gray); text-decoration:line-through; margin-left:8px; }
+.bundle-price .save { display:block; font-size:13px; color:var(--terra); font-weight:600; margin-top:4px; }
+
+/* STORY SECTION */
+.story-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+.story-img { height:400px; background:var(--cream-dark); border-radius:16px; display:flex; align-items:center; justify-content:center; }
+.story-img .emoji { font-size:100px; }
+.story-content h2 { font-size:36px; color:var(--green-dark); margin-bottom:20px; line-height:1.3; }
+.story-content p { font-size:16px; color:var(--gray); line-height:1.8; margin-bottom:16px; }
+.story-content .signature { font-family:'Playfair Display',serif; font-size:20px; color:var(--green); margin-top:24px; font-style:italic; }
+
+/* HOW IT WORKS */
+.steps-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:32px; text-align:center; }
+.step { padding:24px; }
+.step-num { width:48px; height:48px; background:var(--green); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:700; font-family:'Playfair Display',serif; margin:0 auto 16px; }
+.step .emoji { font-size:40px; margin-bottom:12px; }
+.step h4 { font-size:17px; margin-bottom:8px; color:var(--green-dark); font-family:'Inter',sans-serif; font-weight:600; }
+.step p { font-size:13px; color:var(--gray); line-height:1.6; }
+
+/* TESTIMONIALS */
+.testimonial-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+.testimonial { background:#fff; border-radius:12px; padding:28px; border:1px solid var(--gray-light); }
+.testimonial .stars { color:#F5A623; font-size:14px; margin-bottom:12px; }
+.testimonial p { font-size:14px; color:var(--gray); line-height:1.7; margin-bottom:16px; font-style:italic; }
+.testimonial .author { font-size:13px; font-weight:600; color:var(--charcoal); }
+.testimonial .verified { font-size:11px; color:var(--green); }
+
+/* INSTAGRAM / UGC */
+.ugc-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; }
+.ugc-item { aspect-ratio:1; background:var(--cream-dark); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:48px; transition:transform 0.3s; cursor:pointer; position:relative; overflow:hidden; }
+.ugc-item:hover { transform:scale(1.05); }
+.ugc-item::after { content:'@avergo'; position:absolute; bottom:0; left:0; right:0; background:rgba(0,0,0,0.5); color:#fff; font-size:10px; padding:6px; text-align:center; opacity:0; transition:opacity 0.3s; font-family:'Inter',sans-serif; }
+.ugc-item:hover::after { opacity:1; }
+
+/* EMAIL SIGNUP */
+.email-section { background:var(--green); padding:64px 0; text-align:center; color:#fff; }
+.email-section h2 { font-size:36px; margin-bottom:12px; }
+.email-section p { font-size:16px; opacity:0.85; margin-bottom:28px; max-width:500px; margin-left:auto; margin-right:auto; }
+.email-form { display:flex; max-width:480px; margin:0 auto; gap:8px; }
+.email-form input { flex:1; padding:14px 20px; border:none; border-radius:6px; font-size:15px; font-family:'Inter',sans-serif; }
+.email-form button { padding:14px 28px; background:var(--terra); color:#fff; border:none; border-radius:6px; font-size:15px; font-weight:600; cursor:pointer; white-space:nowrap; transition:background 0.2s; }
+.email-form button:hover { background:var(--terra-light); }
+
+/* FOOTER */
+footer { background:var(--charcoal); color:#fff; padding:60px 0 24px; }
+.footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; margin-bottom:40px; }
+.footer-brand .nav-logo { margin-bottom:12px; display:inline-block; }
+.footer-brand p { font-size:13px; color:rgba(255,255,255,0.6); line-height:1.7; max-width:280px; }
+.footer-col h4 { font-size:14px; font-weight:600; margin-bottom:16px; text-transform:uppercase; letter-spacing:1px; font-family:'Inter',sans-serif; }
+.footer-col a { display:block; font-size:13px; color:rgba(255,255,255,0.6); margin-bottom:10px; transition:color 0.2s; }
+.footer-col a:hover { color:var(--terra-light); }
+.footer-bottom { border-top:1px solid rgba(255,255,255,0.1); padding-top:24px; display:flex; justify-content:space-between; align-items:center; font-size:12px; color:rgba(255,255,255,0.4); }
+.payment-icons { display:flex; gap:8px; }
+.payment-icon { background:rgba(255,255,255,0.1); padding:4px 10px; border-radius:4px; font-size:11px; }
+
+/* RESPONSIVE */
+@media(max-width:768px) {
+  .hero .container, .story-grid { grid-template-columns:1fr; }
+  .hero h1 { font-size:36px; }
+  .product-grid, .bundle-grid { grid-template-columns:1fr; max-width:400px; margin:0 auto; }
+  .steps-grid { grid-template-columns:repeat(2,1fr); }
+  .testimonial-grid { grid-template-columns:1fr; }
+  .ugc-grid { grid-template-columns:repeat(3,1fr); }
+  .footer-grid { grid-template-columns:1fr 1fr; }
+  .nav-links { display:none; }
+  .email-form { flex-direction:column; }
+}
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce">🌱 Free Shipping on orders over $50 | <span>Spring Sale: 15% off all bundles</span> with code GROW15</div>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="container">
+    <a href="#" class="nav-logo">AVERG<span>O</span></a>
+    <div class="nav-links">
+      <a href="#shop">Shop All</a>
+      <a href="#bundles">Bundles</a>
+      <a href="#bestsellers">Best Sellers</a>
+      <a href="#story">Our Story</a>
+      <a href="#reviews">Reviews</a>
+    </div>
+    <div class="nav-icons">
+      <a href="#">🔍</a>
+      <a href="#">👤</a>
+      <a href="#">🛒<span class="cart-badge">2</span></a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-text">
+      <span class="hero-badge">🌱 #1 Growing Kit on Amazon</span>
+      <h1>Grow Something <em>Amazing</em></h1>
+      <p>Complete growing kits that turn anyone into a green thumb. No experience needed — just add water and watch the magic happen.</p>
+      <a href="#shop" class="btn btn-primary">Shop Best Sellers</a>
+      <a href="#bundles" class="btn btn-secondary">Build a Bundle</a>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-img-main">
+        <div class="placeholder">
+          <div class="emoji">🌳</div>
+          <p>[ Hero lifestyle image: Bonsai kit on a sunny windowsill ]</p>
+        </div>
+      </div>
+      <div class="hero-float reviews">
+        <div class="stars">★★★★★</div>
+        <div class="rev-text"><strong>4.5 Stars</strong>12,400+ Reviews</div>
+      </div>
+      <div class="hero-float sold">
+        <div class="num">500K+</div>
+        <div class="lbl">Kits Sold</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="container">
+    <div class="trust-item"><span class="trust-icon">📦</span> Free Shipping $50+</div>
+    <div class="trust-item"><span class="trust-icon">🌱</span> Germination Guarantee</div>
+    <div class="trust-item"><span class="trust-icon">🎁</span> Gift-Ready Packaging</div>
+    <div class="trust-item"><span class="trust-icon">💬</span> 12,400+ 5-Star Reviews</div>
+    <div class="trust-item"><span class="trust-icon">🇺🇸</span> US-Based Support</div>
+  </div>
+</div>
+
+<!-- BEST SELLERS -->
+<section class="section" id="bestsellers">
+  <div class="container">
+    <div class="section-title">
+      <h2>Best Sellers</h2>
+      <p>The kits that started it all — loved by over 500,000 growers.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="product-grid">
+      <!-- Product 1 -->
+      <div class="product-card">
+        <div class="product-img">
+          <span class="emoji">🌳🌸🍁</span>
+          <span class="product-badge">Best Seller</span>
+        </div>
+        <div class="product-info">
+          <h3>Bonsai Tree Kit — 5 Unique Japanese Varieties</h3>
+          <div class="rating">★★★★★ <span>(8,200+ reviews)</span></div>
+          <div class="price">$49.99</div>
+          <p style="font-size:13px;color:var(--gray);margin-bottom:12px;">Everything you need to grow 5 stunning bonsai trees from seed. Includes pots, soil, tools, markers & beginner's guide.</p>
+          <button class="product-btn">Add to Cart</button>
+        </div>
+      </div>
+      <!-- Product 2 -->
+      <div class="product-card">
+        <div class="product-img">
+          <span class="emoji">🌿🌱🍃</span>
+          <span class="product-badge green">New</span>
+        </div>
+        <div class="product-info">
+          <h3>Herb Garden Kit — 5 Culinary Herbs</h3>
+          <div class="rating">★★★★★ <span>(3,100+ reviews)</span></div>
+          <div class="price">$39.99</div>
+          <p style="font-size:13px;color:var(--gray);margin-bottom:12px;">Grow basil, cilantro, parsley, thyme & chives right on your kitchen counter. Farm-to-table in weeks.</p>
+          <button class="product-btn">Add to Cart</button>
+        </div>
+      </div>
+      <!-- Product 3 -->
+      <div class="product-card">
+        <div class="product-img">
+          <span class="emoji">🐱🌾</span>
+        </div>
+        <div class="product-info">
+          <h3>Cat Grass Kit — 4 Seed Packs with Wooden Planter</h3>
+          <div class="rating">★★★★★ <span>(2,800+ reviews)</span></div>
+          <div class="price">$27.99</div>
+          <p style="font-size:13px;color:var(--gray);margin-bottom:12px;">Organic wheatgrass your cat will love. Comes with wooden planter, soil & mini gardening tools.</p>
+          <button class="product-btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section section-cream">
+  <div class="container">
+    <div class="section-title">
+      <h2>Growing Made Ridiculously Simple</h2>
+      <p>No green thumb required. Seriously.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="emoji">📦</div>
+        <h4>Unbox Your Kit</h4>
+        <p>Everything's inside — seeds, soil, pots, tools, and a step-by-step guide. Nothing extra to buy.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="emoji">🌱</div>
+        <h4>Plant & Water</h4>
+        <p>Follow our beginner-friendly guide. Takes 10 minutes. If you can pour water, you can do this.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Watch It Grow</h4>
+        <div class="emoji">☀️</div>
+        <p>Place in a sunny spot and watch the magic. First sprouts appear in 1-3 weeks.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="emoji">🤩</div>
+        <h4>Show It Off</h4>
+        <p>You grew that. Share your pride with #GrowWithAvergo and join 50K+ fellow growers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP ALL PRODUCTS -->
+<section class="section" id="shop">
+  <div class="container">
+    <div class="section-title">
+      <h2>Shop the Collection</h2>
+      <p>From seed to stunning — everything you need to grow.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-img"><span class="emoji">🌸</span></div>
+        <div class="product-info">
+          <h3>Flower Garden Kit — 5 Colorful Varieties</h3>
+          <div class="rating">★★★★☆ <span>(1,200+)</span></div>
+          <div class="price">$34.99</div>
+          <button class="product-btn">Add to Cart</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img"><span class="emoji">🌿</span><span class="product-badge green">Essential</span></div>
+        <div class="product-info">
+          <h3>Coconut Coir Potting Soil — 2.5 Quart</h3>
+          <div class="rating">★★★★★ <span>(1,800+)</span></div>
+          <div class="price">$12.99</div>
+          <button class="product-btn">Add to Cart</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img"><span class="emoji">🪴</span></div>
+        <div class="product-info">
+          <h3>Coconut Coir Potting Soil — 3.5 Quart</h3>
+          <div class="rating">★★★★★ <span>(1,400+)</span></div>
+          <div class="price">$16.99</div>
+          <button class="product-btn">Add to Cart</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img"><span class="emoji">💡</span></div>
+        <div class="product-info">
+          <h3>LED Grow Light — Full Spectrum, USB Powered</h3>
+          <div class="rating">★★★★☆ <span>(900+)</span></div>
+          <div class="price">$24.99</div>
+          <button class="product-btn">Add to Cart</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img"><span class="emoji">🪵</span></div>
+        <div class="product-info">
+          <h3>Bamboo Plant Stand — 3 Tier Display</h3>
+          <div class="rating">★★★★★ <span>(600+)</span></div>
+          <div class="price">$32.99</div>
+          <button class="product-btn">Add to Cart</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img"><span class="emoji">🌺</span></div>
+        <div class="product-info">
+          <h3>Bonsai Starter Kit — Jacaranda Tree</h3>
+          <div class="rating">★★★★★ <span>(2,100+)</span></div>
+          <div class="price">$25.00</div>
+          <button class="product-btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUNDLE SECTION -->
+<section class="section section-cream" id="bundles">
+  <div class="container">
+    <div class="section-title">
+      <h2>Bundle & Save</h2>
+      <p>Build the ultimate growing setup. Higher value, lower price.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="bundle-grid">
+      <!-- Starter -->
+      <div class="bundle-card">
+        <div class="bundle-emoji">🌱</div>
+        <h3>The Starter</h3>
+        <p class="bundle-desc">Perfect first-time grower kit</p>
+        <ul class="bundle-items">
+          <li>Bonsai 5-Tree Kit</li>
+          <li>Coconut Coir Soil (2.5 Qt)</li>
+          <li>Beginner's Growing Guide</li>
+          <li>Free shipping</li>
+        </ul>
+        <div class="bundle-price">
+          <span class="current">$54.99</span>
+          <span class="was">$62.98</span>
+          <span class="save">Save $7.99 (13%)</span>
+        </div>
+        <button class="btn btn-primary" style="width:100%;">Add Bundle to Cart</button>
+      </div>
+      <!-- Complete Grower -->
+      <div class="bundle-card featured">
+        <div class="bundle-emoji">🌳</div>
+        <h3>The Complete Grower</h3>
+        <p class="bundle-desc">Everything to grow like a pro</p>
+        <ul class="bundle-items">
+          <li>Bonsai 5-Tree Kit</li>
+          <li>Herb Garden 5-Pack Kit</li>
+          <li>Coconut Coir Soil (3.5 Qt)</li>
+          <li>LED Grow Light</li>
+          <li>Free shipping + priority</li>
+        </ul>
+        <div class="bundle-price">
+          <span class="current">$99.99</span>
+          <span class="was">$131.96</span>
+          <span class="save">Save $31.97 (24%)</span>
+        </div>
+        <button class="btn btn-primary" style="width:100%;background:var(--terra);">Add Bundle to Cart</button>
+      </div>
+      <!-- Ultimate -->
+      <div class="bundle-card">
+        <div class="bundle-emoji">🏡</div>
+        <h3>The Indoor Garden</h3>
+        <p class="bundle-desc">The full indoor garden experience</p>
+        <ul class="bundle-items">
+          <li>Bonsai 5-Tree Kit</li>
+          <li>Herb Garden 5-Pack Kit</li>
+          <li>Flower Kit</li>
+          <li>LED Grow Light</li>
+          <li>Bamboo Plant Stand</li>
+          <li>Coconut Coir Soil (3.5 Qt) x2</li>
+          <li>Free shipping + priority</li>
+        </ul>
+        <div class="bundle-price">
+          <span class="current">$159.99</span>
+          <span class="was">$216.93</span>
+          <span class="save">Save $56.94 (26%)</span>
+        </div>
+        <button class="btn btn-primary" style="width:100%;">Add Bundle to Cart</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND STORY -->
+<section class="section" id="story">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-img">
+        <div class="emoji">🧑‍🌾</div>
+      </div>
+      <div class="story-content">
+        <h2>We Killed Every Plant We Ever Owned. Then We Fixed It.</h2>
+        <p>It started with embarrassment. Dead succulents. Brown herbs. A "low maintenance" fern that lasted 11 days. We loved the idea of growing things, but nothing survived.</p>
+        <p>So we became obsessed. We talked to botanists, tested 200+ soil mixes, and failed forward for two years — all to answer one question: <strong>Why is growing a plant so hard for normal people?</strong></p>
+        <p>The answer? It's not. The kits were just terrible. Wrong soil. Confusing instructions. Cheap tools. So we built what should have existed all along — beautiful, foolproof growing kits that actually work.</p>
+        <p>Today, over <strong>500,000 people</strong> have grown something amazing with Avergo. First-timers, gift-givers, parents with curious kids, apartment dwellers with zero outdoor space. Every sprout is proof that anyone can grow.</p>
+        <div class="signature">— The Avergo Team</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section section-cream" id="reviews">
+  <div class="container">
+    <div class="section-title">
+      <h2>What Our Growers Say</h2>
+      <p>12,400+ five-star reviews and counting.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="testimonial-grid">
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>"I have literally killed every plant I've ever owned. This bonsai kit? Two of the five seeds sprouted in 10 days. I'm unreasonably proud. Already ordered the herb kit."</p>
+        <div class="author">Sarah M.</div>
+        <div class="verified">✓ Verified Buyer — Bonsai 5-Tree Kit</div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>"Bought this as a birthday gift for my dad who's impossible to buy for. He texts me photos of his bonsai every week now. Best $50 I've ever spent."</p>
+        <div class="author">James R.</div>
+        <div class="verified">✓ Verified Buyer — Bonsai 5-Tree Kit</div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>"My cat literally sprints to the planter every morning. The grass grows fast and the wooden planter looks beautiful on our counter. Ordering a second one for my mom's cats."</p>
+        <div class="author">Ashley K.</div>
+        <div class="verified">✓ Verified Buyer — Cat Grass Kit</div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>"The herb kit is incredible. Fresh basil and cilantro in 3 weeks. The guide makes it so easy. I never thought I'd be someone who grows their own food but here I am."</p>
+        <div class="author">Marcus T.</div>
+        <div class="verified">✓ Verified Buyer — Herb Garden Kit</div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>"Got the Complete Grower bundle — the LED light makes such a difference in winter. Everything is growing beautifully. My apartment feels like a jungle now."</p>
+        <div class="author">Priya D.</div>
+        <div class="verified">✓ Verified Buyer — Complete Grower Bundle</div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>"Perfect Mother's Day gift. The packaging is gorgeous — felt premium and gift-ready. My mom cried when she saw it. She's been growing bonsai ever since."</p>
+        <div class="author">David L.</div>
+        <div class="verified">✓ Verified Buyer — Bonsai 5-Tree Kit</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AS SEEN ON / SOCIAL PROOF -->
+<section class="section" style="padding:40px 0;">
+  <div class="container">
+    <div class="section-title" style="margin-bottom:24px;">
+      <p style="font-size:13px;text-transform:uppercase;letter-spacing:2px;color:var(--gray);">As Featured In</p>
+    </div>
+    <div style="display:flex;justify-content:center;gap:48px;flex-wrap:wrap;align-items:center;opacity:0.4;">
+      <span style="font-size:24px;font-weight:700;font-family:'Playfair Display',serif;">BuzzFeed</span>
+      <span style="font-size:24px;font-weight:700;font-family:'Playfair Display',serif;">TODAY</span>
+      <span style="font-size:24px;font-weight:700;font-family:'Playfair Display',serif;">Good Housekeeping</span>
+      <span style="font-size:24px;font-weight:700;font-family:'Playfair Display',serif;">Real Simple</span>
+      <span style="font-size:24px;font-weight:700;font-family:'Playfair Display',serif;">Martha Stewart</span>
+    </div>
+  </div>
+</section>
+
+<!-- UGC / INSTAGRAM -->
+<section class="section section-cream" style="padding:48px 0;">
+  <div class="container">
+    <div class="section-title" style="margin-bottom:24px;">
+      <h2>Grown with Avergo</h2>
+      <p>Tag us @avergo with #GrowWithAvergo for a chance to be featured.</p>
+    </div>
+    <div class="ugc-grid">
+      <div class="ugc-item">🌸</div>
+      <div class="ugc-item">🌳</div>
+      <div class="ugc-item">🐱</div>
+      <div class="ugc-item">🌿</div>
+      <div class="ugc-item">🍁</div>
+    </div>
+  </div>
+</section>
+
+<!-- GIFT CALLOUT -->
+<section class="section" style="padding:60px 0;">
+  <div class="container">
+    <div style="background:linear-gradient(135deg,var(--cream) 0%,var(--cream-dark) 100%);border-radius:20px;padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;">
+      <div>
+        <h2 style="font-size:32px;color:var(--green-dark);margin-bottom:16px;">The Gift They'll Actually Love</h2>
+        <p style="font-size:16px;color:var(--gray);line-height:1.7;margin-bottom:8px;">Tired of candles and socks? Avergo kits are the unique, memorable gift that keeps growing — literally. Beautiful packaging, no wrapping needed.</p>
+        <p style="font-size:14px;color:var(--gray);margin-bottom:24px;">🎁 Gift-ready packaging &nbsp; | &nbsp; 📝 Personal note included &nbsp; | &nbsp; 🚚 Ships in 1-2 days</p>
+        <a href="#shop" class="btn btn-primary">Shop Gift-Ready Kits</a>
+      </div>
+      <div style="text-align:center;font-size:100px;">🎁🌳</div>
+    </div>
+  </div>
+</section>
+
+<!-- EMAIL SIGNUP -->
+<section class="email-section">
+  <div class="container">
+    <h2>Join the Avergo Growing Club</h2>
+    <p>Get 10% off your first order, growing tips, and first access to new kits. No spam — just sprouts.</p>
+    <div class="email-form">
+      <input type="email" placeholder="Enter your email">
+      <button>Get 10% Off →</button>
+    </div>
+    <p style="font-size:12px;opacity:0.5;margin-top:12px;">Join 50,000+ growers. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo" style="color:var(--white);">AVERG<span style="color:var(--terra-light);">O</span></a>
+        <p>Grow Something Amazing. Complete growing kits that make anyone a grower — no experience needed.</p>
+        <div style="margin-top:16px;display:flex;gap:12px;">
+          <a href="#" style="font-size:18px;">📘</a>
+          <a href="#" style="font-size:18px;">📸</a>
+          <a href="#" style="font-size:18px;">🐦</a>
+          <a href="#" style="font-size:18px;">📌</a>
+          <a href="#" style="font-size:18px;">▶️</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a href="#">All Products</a>
+        <a href="#">Bonsai Kits</a>
+        <a href="#">Herb Kits</a>
+        <a href="#">Cat Grass</a>
+        <a href="#">Accessories</a>
+        <a href="#">Gift Cards</a>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <a href="#">Growing Guides</a>
+        <a href="#">FAQs</a>
+        <a href="#">Shipping & Returns</a>
+        <a href="#">Contact Us</a>
+        <a href="#">Track Order</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">Our Story</a>
+        <a href="#">Blog</a>
+        <a href="#">Wholesale</a>
+        <a href="#">Affiliate Program</a>
+        <a href="#">Press</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 Avergo. All rights reserved.</span>
+      <div class="payment-icons">
+        <span class="payment-icon">Visa</span>
+        <span class="payment-icon">MC</span>
+        <span class="payment-icon">Amex</span>
+        <span class="payment-icon">PayPal</span>
+        <span class="payment-icon">Apple Pay</span>
+        <span class="payment-icon">Shop Pay</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
