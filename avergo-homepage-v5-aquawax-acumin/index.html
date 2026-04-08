@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Avergo — Grow Something Beautiful (V5)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Fraunces', 'Georgia', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    /*
+    =============================================================
+    AVERGO — HOMEPAGE DESIGN REFERENCE
+    =============================================================
+    PURPOSE: This file is a pixel-faithful reference of the Avergo
+    homepage design, intended as a handoff document for building
+    a Shopify theme. Every section is annotated.
+
+    BRAND COLORS:
+      Background:    #FAF6EE  (off-white)
+      Text:          #1E1611  (deep forest)
+      Accent green:  #4A5D23  (olive/moss)
+      Light bg:      #F2E8D5  (warm cream)
+      Muted:         #E6D9BE  (linen)
+      Light accent:  #8BAF6A  (sage, used on dark bg)
+
+    FONTS:
+      Headings:  Fraunces (serif, italic available)
+      Body:      Inter (sans-serif)
+
+    IMAGES:
+      Replace the src attributes below with your Shopify CDN URLs
+      after uploading the image files to Shopify Settings > Files.
+      The 10 image files are:
+        avergo-hero.png            (hero background, 1920x1080+)
+        avergo-kits.png            (category: growing kits)
+        avergo-planters.png        (category: wall planters)
+        avergo-accessories.png     (category: accessories)
+        avergo-product-bonsai.png  (product: bonsai kit)
+        avergo-product-herb.png    (product: herb trio)
+        avergo-product-planter.png (product: walnut planter)
+        avergo-bundle.png          (starter bundle image)
+        avergo-how-it-works.png    (how it works section)
+        avergo-founder.png         (founder portrait)
+    =============================================================
+    */
+
+    body {
+      font-family: 'Acumin Pro', 'Source Sans 3', system-ui, sans-serif;
+      background: #FAF6EE;
+      color: #1E1611;
+    }
+
+    .font-serif { font-family: 'Aquawax Pro', 'Outfit', Century Gothic, sans-serif; }
+
+
+      /* ── Licensed fonts: Aquawax Pro + Acumin Pro ── */
+      /* Upload font files to the fonts/ folder to activate these. */
+      /* Outfit + Source Sans 3 (Google Fonts) are loaded as fallbacks. */
+      @font-face {
+        font-family: 'Aquawax Pro';
+        src: url('fonts/AquawaxPro-Regular.woff2') format('woff2'),
+             url('fonts/AquawaxPro-Regular.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Aquawax Pro';
+        src: url('fonts/AquawaxPro-Medium.woff2') format('woff2'),
+             url('fonts/AquawaxPro-Medium.woff') format('woff');
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Aquawax Pro';
+        src: url('fonts/AquawaxPro-Bold.woff2') format('woff2'),
+             url('fonts/AquawaxPro-Bold.woff') format('woff');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Acumin Pro';
+        src: url('fonts/AcuminPro-Regular.woff2') format('woff2'),
+             url('fonts/AcuminPro-Regular.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Acumin Pro';
+        src: url('fonts/AcuminPro-Light.woff2') format('woff2'),
+             url('fonts/AcuminPro-Light.woff') format('woff');
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Acumin Pro';
+        src: url('fonts/AcuminPro-Semibold.woff2') format('woff2'),
+             url('fonts/AcuminPro-Semibold.woff') format('woff');
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+      }
+
+    /* Smooth hover transitions */
+    a, button { transition: all 0.3s ease; }
+  </style>
+
+    <style>
+      /* ── Responsive image containers ── */
+      .img-cat     { aspect-ratio: 3/4; }
+      .img-product { aspect-ratio: 1/1; }
+      .img-bundle  { aspect-ratio: 16/9; }
+      .img-hiw     { aspect-ratio: 16/9; overflow: hidden; border-radius: 0.75rem; margin-top: 4rem; }
+      .img-hiw img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+      .img-founder { aspect-ratio: 3/4; }
+
+      @media (max-width: 767px) {
+        .img-cat    { aspect-ratio: 4/3; }
+        .img-bundle { aspect-ratio: 4/3; }
+        .img-hiw    { aspect-ratio: 4/3; margin-top: 2rem; }
+      }
+    </style>
+</head>
+<body class="min-h-screen bg-[#FAF6EE] text-[#1E1611]">
+
+  <!-- ============================================================
+       SECTION: NAVIGATION
+       Shopify: layout/theme.liquid or sections/header.liquid
+       Note: Becomes transparent over the hero, then gains
+       bg-white/shadow on scroll (requires JS or scroll-driven CSS)
+  ============================================================ -->
+  <nav class="w-full bg-[#FAF6EE] shadow-sm sticky top-0 z-50" style="height:80px;">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 relative flex items-center justify-between h-full">
+      <!-- Left nav links (desktop) -->
+      <div class="hidden lg:flex items-center gap-8 text-sm font-medium tracking-wide text-[#1E1611]">
+        <a href="#" class="hover:opacity-60">Shop</a>
+        <a href="#" class="hover:opacity-60">Kits</a>
+        <a href="#" class="hover:opacity-60">Planters</a>
+        <a href="#" class="hover:opacity-60">Learn</a>
+      </div>
+      <!-- Mobile menu button -->
+      <button class="lg:hidden text-[#1E1611]">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <!-- Logo / Brand name -->
+      <a href="#" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center">
+            <img src="images/avergo-logo.png" alt="Avergo" class="h-auto w-auto" style="max-height:58px;" />
+          </a>
+      <!-- Right icons -->
+      <div class="flex items-center gap-6 text-[#1E1611]">
+        <button class="hidden md:block hover:opacity-60">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        </button>
+        <button class="hover:opacity-60">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 11H4L5 9z"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       SECTION: HERO
+       Shopify: sections/hero-banner.liquid
+       Full-viewport hero with background image + dark overlay.
+       Text centered, headline in Fraunces italic.
+  ============================================================ -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden" style="min-height:100vh;">
+    <!-- Background image — replace src with Shopify CDN URL -->
+    <div class="absolute inset-0">
+      <img src="images/avergo-hero.jpg" alt="Hands holding a young bonsai" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-black/20"></div>
+    </div>
+    <!-- Content -->
+    <div class="relative z-10 text-center text-white px-6 max-w-4xl mx-auto flex flex-col items-center">
+      <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif tracking-normal mb-6 leading-tight">
+        Grow Something Beautiful. <br/><span class="italic" style="opacity:0.9;">Made Easy.</span>
+      </h1>
+      <p class="text-lg md:text-xl font-light tracking-wide mb-10 max-w-xl mx-auto" style="opacity:0.9;">
+        Beautifully crafted growing kits and accessories that make it easy to bring something alive into your home, or the home of someone you love.
+      </p>
+      <a href="#" class="inline-flex items-center gap-3 bg-white text-[#1E1611] px-8 py-4 rounded-full text-sm uppercase tracking-widest font-medium hover:bg-[#F0F0F0]">
+        Shop the Collection
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION: VALUE PROPS (3 pillars)
+       Shopify: sections/value-props.liquid
+       3-column grid, icon + heading + short copy. Dividers between columns.
+  ============================================================ -->
+  <section class="py-20 bg-[#F2E8D5]">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center divide-y md:divide-y-0 md:divide-x divide-[#1E1611]/10">
+        <div class="flex flex-col items-center px-6 pt-6 md:pt-0">
+          <div class="w-12 h-12 rounded-full bg-[#E6D9BE] flex items-center justify-center mb-6 text-[#4A5D23]">
+            <!-- Leaf icon -->
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3s0 8 5 13c2.5 2.5 6 4 10 4S5 3 5 3z"/></svg>
+          </div>
+          <h3 class="text-lg font-serif mb-3">Works Every Time</h3>
+          <p class="text-[#1E1611]/70 text-sm leading-relaxed">We tested every seed, soil ratio, and guide until it worked the first time, every time. No green thumb required.</p>
+        </div>
+        <div class="flex flex-col items-center px-6 pt-12 md:pt-0">
+          <div class="w-12 h-12 rounded-full bg-[#E6D9BE] flex items-center justify-center mb-6 text-[#4A5D23]">
+            <!-- Droplets icon -->
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0L12 2.69z"/></svg>
+          </div>
+          <h3 class="text-lg font-serif mb-3">Zero Guesswork</h3>
+          <p class="text-[#1E1611]/70 text-sm leading-relaxed">Step-by-step guides take you from opening the box to a thriving plant — without wondering what you did wrong.</p>
+        </div>
+        <div class="flex flex-col items-center px-6 pt-12 md:pt-0">
+          <div class="w-12 h-12 rounded-full bg-[#E6D9BE] flex items-center justify-center mb-6 text-[#4A5D23]">
+            <!-- Sun icon -->
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/><path stroke-linecap="round" stroke-width="2" d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          </div>
+          <h3 class="text-lg font-serif mb-3">Beautiful by Design</h3>
+          <p class="text-[#1E1611]/70 text-sm leading-relaxed">Grow lights, planters, and stands designed to look like they were always meant to be part of your home.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION: CATEGORIES
+       Shopify: sections/collection-grid.liquid
+       3-column image cards with gradient overlay + title + arrow.
+       Each card links to a Shopify collection.
+  ============================================================ -->
+  <section class="py-24 md:py-32">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+        <h2 class="text-4xl md:text-5xl font-serif tracking-tight max-w-lg">Everything you need to grow.</h2>
+        <a href="#" class="flex items-center gap-2 text-sm uppercase tracking-widest font-medium border-b border-[#1E1611] pb-1 hover:text-[#4A5D23] hover:border-[#4A5D23]">
+          Explore All
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <!-- Category card: Growing Kits -->
+        <a href="#" class="img-cat group relative block overflow-hidden rounded-lg bg-[#E6D9BE]">
+          <img src="images/avergo-kits.jpg" alt="Growing Kits" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          <div class="absolute inset-0" style="background:linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%); opacity:0.6;"></div>
+          <div class="absolute bottom-0 left-0 p-8 w-full flex justify-between items-end">
+            <h3 class="text-white text-2xl font-serif">Growing Kits</h3>
+            <div class="w-10 h-10 rounded-full flex items-center justify-center text-white" style="background:rgba(255,255,255,0.2); backdrop-filter:blur(8px);">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+        </a>
+        <!-- Category card: Wall Planters -->
+        <a href="#" class="img-cat group relative block overflow-hidden rounded-lg bg-[#E6D9BE]">
+          <img src="images/avergo-planters.jpg" alt="Wall Planters" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          <div class="absolute inset-0" style="background:linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%); opacity:0.6;"></div>
+          <div class="absolute bottom-0 left-0 p-8 w-full flex justify-between items-end">
+            <h3 class="text-white text-2xl font-serif">Wall Planters</h3>
+            <div class="w-10 h-10 rounded-full flex items-center justify-center text-white" style="background:rgba(255,255,255,0.2); backdrop-filter:blur(8px);">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+        </a>
+        <!-- Category card: Accessories -->
+        <a href="#" class="img-cat group relative block overflow-hidden rounded-lg bg-[#E6D9BE]">
+          <img src="images/avergo-accessories.jpg" alt="Accessories" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          <div class="absolute inset-0" style="background:linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%); opacity:0.6;"></div>
+          <div class="absolute bottom-0 left-0 p-8 w-full flex justify-between items-end">
+            <h3 class="text-white text-2xl font-serif">Accessories</h3>
+            <div class="w-10 h-10 rounded-full flex items-center justify-center text-white" style="background:rgba(255,255,255,0.2); backdrop-filter:blur(8px);">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION: FEATURED PRODUCTS (Signature Collection)
+       Shopify: sections/featured-products.liquid
+       3-product grid. Each card = product image + title + price.
+       Hover reveals "Quick Add" button.
+       In Shopify: loop over a hand-picked collection using
+       {{ section.settings.collection.products }}
+  ============================================================ -->
+  <section class="py-24 bg-[#E6D9BE]">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-serif tracking-tight mb-4">Signature Collection</h2>
+        <p class="text-[#1E1611]/70 max-w-xl mx-auto text-lg">Everything you need to start growing, thoughtfully designed to look beautiful in your home.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+        <!-- Product 1 -->
+        <div class="group cursor-pointer">
+          <div class="img-product overflow-hidden rounded-lg mb-6 bg-white relative">
+            <img src="images/avergo-product-bonsai.jpg" alt="Japanese Maple Bonsai Kit" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute bottom-4 left-0 right-0 flex justify-center">
+              <button class="bg-white text-[#1E1611] px-6 py-3 rounded-full text-sm uppercase tracking-widest font-medium shadow-lg hover:bg-[#1E1611] hover:text-white">Quick Add</button>
+            </div>
+          </div>
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="font-serif text-lg mb-1">Japanese Maple Bonsai Kit</h3>
+              <p class="text-sm text-[#1E1611]/60">Complete growing kit</p>
+            </div>
+            <span class="font-medium">$45</span>
+          </div>
+        </div>
+        <!-- Product 2 -->
+        <div class="group cursor-pointer">
+          <div class="img-product overflow-hidden rounded-lg mb-6 bg-white relative">
+            <img src="images/avergo-product-herb.jpg" alt="Culinary Herb Trio" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute bottom-4 left-0 right-0 flex justify-center">
+              <button class="bg-white text-[#1E1611] px-6 py-3 rounded-full text-sm uppercase tracking-widest font-medium shadow-lg hover:bg-[#1E1611] hover:text-white">Quick Add</button>
+            </div>
+          </div>
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="font-serif text-lg mb-1">Culinary Herb Trio</h3>
+              <p class="text-sm text-[#1E1611]/60">Complete growing kit</p>
+            </div>
+            <span class="font-medium">$38</span>
+          </div>
+        </div>
+        <!-- Product 3 -->
+        <div class="group cursor-pointer">
+          <div class="img-product overflow-hidden rounded-lg mb-6 bg-white relative">
+            <img src="images/avergo-product-planter.jpg" alt="Walnut Hexagon Planter" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute bottom-4 left-0 right-0 flex justify-center">
+              <button class="bg-white text-[#1E1611] px-6 py-3 rounded-full text-sm uppercase tracking-widest font-medium shadow-lg hover:bg-[#1E1611] hover:text-white">Quick Add</button>
+            </div>
+          </div>
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="font-serif text-lg mb-1">Walnut Hexagon Planter</h3>
+              <p class="text-sm text-[#1E1611]/60">Complete growing kit</p>
+            </div>
+            <span class="font-medium">$65</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION: BUNDLE
+       Shopify: sections/bundle.liquid or a custom app block
+       3 product cards with "+" connectors + price box.
+       In Shopify: this can be done with a Bundle app (e.g. Bundler)
+       or a custom section. The Add to Cart button adds all 3 items.
+       Bundle SKU: Kit ($45) + Stand ($35) + Light ($55) = $135 → $109
+  ============================================================ -->
+  <section class="py-24 md:py-32 bg-[#F2E8D5]">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <!-- Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 pb-8 border-b border-[#1E1611]/10">
+        <div>
+          <div class="inline-flex items-center gap-2 bg-[#4A5D23] text-white text-xs uppercase tracking-widest font-medium px-4 py-2 rounded-full mb-5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+            Bundle — 3 items, 1 price
+          </div>
+          <h2 class="text-4xl md:text-5xl font-serif tracking-tight">The Starter Bundle</h2>
+        </div>
+        <div class="flex items-center gap-3 bg-white border border-[#1E1611]/10 rounded-2xl px-6 py-4">
+          <div>
+            <p class="text-3xl font-serif text-[#1E1611]">$109</p>
+            <p class="text-sm line-through" style="color:rgba(44,59,46,0.45);">$135 if bought separately</p>
+          </div>
+          <div class="ml-2 text-[#4A5D23] text-sm font-semibold px-3 py-1 rounded-full" style="background:rgba(74,93,35,0.1);">Save $26</div>
+        </div>
+      </div>
+      <!-- 3 item cards -->
+      <div class="grid gap-4 items-stretch mb-16" style="grid-template-columns: 1fr auto 1fr auto 1fr;">
+        <!-- Item 01 -->
+        <div class="bg-white rounded-xl p-7 flex flex-col gap-3 border border-[#1E1611]/5">
+          <div class="flex justify-between items-start">
+            <span class="text-xs font-medium text-[#4A5D23] uppercase tracking-widest">01</span>
+            <span class="text-sm text-[#1E1611]/40">$45</span>
+          </div>
+          <div>
+            <p class="font-serif text-xl text-[#1E1611]">Growing Kit</p>
+            <p class="text-sm text-[#4A5D23] font-medium">Bonsai or Herb</p>
+          </div>
+          <p class="text-sm text-[#1E1611]/60 leading-relaxed mt-auto">Everything to get from seed to thriving plant — no extras needed.</p>
+        </div>
+        <div class="flex items-center justify-center text-2xl font-light px-1" style="color:rgba(44,59,46,0.25);">+</div>
+        <!-- Item 02 -->
+        <div class="bg-white rounded-xl p-7 flex flex-col gap-3 border border-[#1E1611]/5">
+          <div class="flex justify-between items-start">
+            <span class="text-xs font-medium text-[#4A5D23] uppercase tracking-widest">02</span>
+            <span class="text-sm text-[#1E1611]/40">$35</span>
+          </div>
+          <div>
+            <p class="font-serif text-xl text-[#1E1611]">Wooden Stand</p>
+            <p class="text-sm text-[#4A5D23] font-medium">Solid Oak</p>
+          </div>
+          <p class="text-sm text-[#1E1611]/60 leading-relaxed mt-auto">Solid oak. Sized and designed to sit perfectly alongside your kit.</p>
+        </div>
+        <div class="flex items-center justify-center text-2xl font-light px-1" style="color:rgba(44,59,46,0.25);">+</div>
+        <!-- Item 03 -->
+        <div class="bg-white rounded-xl p-7 flex flex-col gap-3 border border-[#1E1611]/5">
+          <div class="flex justify-between items-start">
+            <span class="text-xs font-medium text-[#4A5D23] uppercase tracking-widest">03</span>
+            <span class="text-sm text-[#1E1611]/40">$55</span>
+          </div>
+          <div>
+            <p class="font-serif text-xl text-[#1E1611]">Grow Light</p>
+            <p class="text-sm text-[#4A5D23] font-medium">Full Spectrum</p>
+          </div>
+          <p class="text-sm text-[#1E1611]/60 leading-relaxed mt-auto">Full spectrum, adjustable, timer-equipped. Plug in and let it do the rest.</p>
+        </div>
+      </div>
+      <!-- Image + CTA -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div class="img-bundle overflow-hidden rounded-xl">
+          <img src="images/avergo-v3-gift.jpg" alt="The Avergo Starter Bundle" class="w-full h-full object-cover" />
+        </div>
+        <div class="lg:pl-6">
+          <p class="text-[#1E1611]/70 text-lg font-light leading-relaxed mb-8">
+            One order. Everything designed to work together — your kit, your stand, your light. Sized and built to look like a set, not an afterthought. Start with everything you need, and nothing you don't.
+          </p>
+          <button class="inline-flex items-center gap-3 bg-[#1E1611] text-[#FAF6EE] px-10 py-4 rounded-full text-sm uppercase tracking-widest font-medium hover:bg-[#4A5D23]">
+            Add Bundle to Cart — $109
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+          <p class="mt-4 text-xs text-[#1E1611]/40 uppercase tracking-widest">Free shipping · 30-day guarantee</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION: HOW IT WORKS
+       Shopify: sections/how-it-works.liquid
+       3-step numbered process with connecting line + image below.
+       Static content — can use metafields or hardcoded.
+  ============================================================ -->
+  <section class="py-24 md:py-32">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="text-center mb-20">
+        <p class="text-xs uppercase tracking-widest font-medium text-[#4A5D23] mb-4">Simple by design</p>
+        <h2 class="text-4xl md:text-5xl font-serif tracking-tight">From box to bloom, in three steps.</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 relative">
+        <!-- Connecting line (desktop only) -->
+        <div class="hidden md:block absolute h-px bg-[#1E1611]/10" style="top:2rem; left:calc(16.666% + 2rem); right:calc(16.666% + 2rem);"></div>
+        <div class="flex flex-col items-center text-center">
+          <div class="w-16 h-16 rounded-full bg-[#E6D9BE] flex items-center justify-center mb-8 relative z-10">
+            <span class="font-serif text-lg text-[#4A5D23]">01</span>
+          </div>
+          <h3 class="text-xl font-serif mb-4">Choose your kit</h3>
+          <p class="text-sm leading-relaxed max-w-xs" style="color:rgba(44,59,46,0.65);">Pick the plant that feels right — bonsai, herbs, or flowers. Every kit comes with everything you need, inside the box.</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <div class="w-16 h-16 rounded-full bg-[#E6D9BE] flex items-center justify-center mb-8 relative z-10">
+            <span class="font-serif text-lg text-[#4A5D23]">02</span>
+          </div>
+          <h3 class="text-xl font-serif mb-4">Plant with confidence</h3>
+          <p class="text-sm leading-relaxed max-w-xs" style="color:rgba(44,59,46,0.65);">Follow the guide, add water, press in the seeds. We've made every step clear enough that you can't get it wrong.</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <div class="w-16 h-16 rounded-full bg-[#E6D9BE] flex items-center justify-center mb-8 relative z-10">
+            <span class="font-serif text-lg text-[#4A5D23]">03</span>
+          </div>
+          <h3 class="text-xl font-serif mb-4">Watch it grow</h3>
+          <p class="text-sm leading-relaxed max-w-xs" style="color:rgba(44,59,46,0.65);">With the right light and the right care, your plant does what plants do. You just get to watch something grow.</p>
+        </div>
+      </div>
+      <div class="img-hiw">
+        <img src="images/avergo-how-it-works.jpg" alt="How to grow your kit" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION: TESTIMONIALS
+       Shopify: sections/testimonials.liquid
+       Dark background (#1E1611). 3 review cards + social proof stats.
+       In Shopify: can use Shopify Reviews app or Judge.me,
+       but this section can also be hardcoded/editable via metafields.
+  ============================================================ -->
+  <section class="py-24 bg-[#1E1611]">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="text-center mb-16">
+        <p class="text-xs uppercase tracking-widest font-medium mb-4" style="color:#8BAF6A;">What our growers say</p>
+        <h2 class="text-4xl md:text-5xl font-serif tracking-tight text-white">Thriving, not just surviving.</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="rounded-xl p-8 flex flex-col gap-6" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+          <div class="flex gap-1">
+            <svg class="w-4 h-4 fill-current" style="color:#8BAF6A;" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 fill-current" style="color:#8BAF6A;" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 fill-current" style="color:#8BAF6A;" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 fill-current" style="color:#8BAF6A;" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 fill-current" style="color:#8BAF6A;" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="font-light text-base leading-relaxed flex-1 italic" style="color:rgba(250,250,250,0.8);">"I've killed every plant I've ever owned. The Avergo herb kit has been alive for four months and I'm genuinely proud of it."</p>
+          <div>
+            <p class="text-white font-medium text-sm">Maya R.</p>
+            <p class="text-xs" style="color:rgba(250,250,250,0.45);">Brooklyn, NY</p>
+          </div>
+        </div>
+        <div class="rounded-xl p-8 flex flex-col gap-6" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+          <div class="flex gap-1">
+            <svg class="w-4 h-4 fill-current" style="color:#8BAF6A;" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 fill-current" style="color:#8BAF6A;" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 fill-current" style="color:#8BAF6A;" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 fill-current" style="color:#8BAF6A;" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 fill-current" style="color:#8BAF6A;" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="font-light text-base leading-relaxed flex-1 italic" style="color:rgba(250,250,250,0.8);">"The bonsai kit with the stand and grow light looks like a piece of art in my apartment. I get compliments every single time someone visits."</p>
+          <div>
+            <p class="text-white font-medium text-sm">James T.</p>
+            <p class="text-xs" style="color:rgba(250,250,250,0.45);">San Francisco, CA</p>
+          </div>
+        </div>
+        <div class="rounded-xl p-8 flex flex-col gap-6" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+          <div class="flex gap-1">
+            <svg class="w-4 h-4 fill-current" style="color:#8BAF6A;" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 fill-current" style="color:#8BAF6A;" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 fill-current" style="color:#8BAF6A;" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 fill-current" style="color:#8BAF6A;" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 fill-current" style="color:#8BAF6A;" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="font-light text-base leading-relaxed flex-1 italic" style="color:rgba(250,250,250,0.8);">"I bought it as a gift and my sister cried. The packaging, the quality, everything — it felt like a luxury gift that actually does something."</p>
+          <div>
+            <p class="text-white font-medium text-sm">Priya M.</p>
+            <p class="text-xs" style="color:rgba(250,250,250,0.45);">Chicago, IL</p>
+          </div>
+        </div>
+      </div>
+      <!-- Stats bar -->
+      <div class="mt-14 flex flex-col sm:flex-row items-center justify-center gap-8 text-center border-t pt-14" style="border-color:rgba(255,255,255,0.1);">
+        <div class="sm:px-16 sm:border-r" style="border-color:rgba(255,255,255,0.1);">
+          <p class="text-4xl font-serif text-white mb-1">4.9 / 5</p>
+          <p class="text-sm uppercase tracking-widest" style="color:rgba(250,250,250,0.5);">Average rating</p>
+        </div>
+        <div class="sm:px-16 sm:border-r" style="border-color:rgba(255,255,255,0.1);">
+          <p class="text-4xl font-serif text-white mb-1">12,000+</p>
+          <p class="text-sm uppercase tracking-widest" style="color:rgba(250,250,250,0.5);">Kits sold</p>
+        </div>
+        <div class="sm:px-16">
+          <p class="text-4xl font-serif text-white mb-1">94%</p>
+          <p class="text-sm uppercase tracking-widest" style="color:rgba(250,250,250,0.5);">Would recommend</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION: FOUNDER / BRAND STORY
+       Shopify: sections/brand-story.liquid
+       Portrait image left, text right. Floating quote card (desktop).
+       Static content — editable via section settings / metafields.
+  ============================================================ -->
+  <section class="py-24 md:py-32">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div class="relative">
+          <div class="img-founder overflow-hidden rounded-lg">
+            <img src="images/avergo-founder.jpg" alt="Leila Nasser, founder of Avergo" class="w-full h-full object-cover" />
+          </div>
+          <!-- Floating quote card (desktop) -->
+          <div class="absolute hidden lg:block bg-[#F2E8D5] rounded-lg px-8 py-6 max-w-[240px] shadow-sm border border-[#1E1611]/5" style="bottom:-1.5rem; right:-1.5rem;">
+            <p class="font-serif text-2xl text-[#1E1611] mb-1">"Grow something."</p>
+            <p class="text-xs text-[#1E1611]/50 uppercase tracking-widest">Avergo's one-liner</p>
+          </div>
+        </div>
+        <div class="lg:pl-12">
+          <p class="text-xs uppercase tracking-widest font-medium text-[#4A5D23] mb-6">Our story</p>
+          <h2 class="text-4xl md:text-5xl font-serif tracking-tight mb-8 leading-tight">Two years of testing until it worked. Every time.</h2>
+          <div class="space-y-5 text-base leading-relaxed mb-10" style="color:rgba(44,59,46,0.75);">
+            <p>Avergo started with a simple frustration: growing plants should feel good, but for most people it doesn't — because the kits, soil, and tools they've been given weren't designed well enough. So we fixed that.</p>
+            <p>Two years of testing seeds, soil ratios, and step-by-step guides until it worked the first time, every time. Today Avergo makes growing kits that take anyone from seed to thriving plant with zero guesswork, and accessories — wall planters, water globes, grow lights, stands — that make the result look like it was always meant to be part of your home.</p>
+            <p>And it turns out, a growing kit makes one of the most unexpectedly perfect gifts — not for what it is on day one, but for what it becomes: weeks of small progress, something alive that wasn't there before, growing in someone's home because you put it there.</p>
+          </div>
+          <div class="flex flex-wrap gap-6 mb-10">
+            <div class="flex flex-col">
+              <span class="text-2xl font-serif text-[#1E1611]">2021</span>
+              <span class="text-xs uppercase tracking-widest" style="color:rgba(44,59,46,0.5);">Founded</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-2xl font-serif text-[#1E1611]">Amsterdam</span>
+              <span class="text-xs uppercase tracking-widest" style="color:rgba(44,59,46,0.5);">Based in</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-2xl font-serif text-[#1E1611]">50,000+</span>
+              <span class="text-xs uppercase tracking-widest" style="color:rgba(44,59,46,0.5);">Trees planted</span>
+            </div>
+          </div>
+          <a href="#" class="inline-flex items-center gap-3 border border-[#1E1611] text-[#1E1611] px-8 py-4 rounded-full text-sm uppercase tracking-widest font-medium hover:bg-[#1E1611] hover:text-white">
+            Read the full story
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION: NEWSLETTER + FOOTER
+       Shopify: sections/footer.liquid
+       Dark background. Email signup + 3-column footer links.
+       Email form connects to Shopify's customer mailing list
+       (Klaviyo / Shopify Email integration recommended).
+  ============================================================ -->
+  <footer class="bg-[#1E1611] text-[#FAF6EE] pt-24 pb-12">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
+        <!-- Newsletter -->
+        <div>
+          <h2 class="text-4xl font-serif tracking-tight mb-6">A living thing in every home.</h2>
+          <p class="mb-8 max-w-md" style="color:rgba(250,250,250,0.7);">Growing tips, new arrivals, and the occasional reminder that something alive in your home changes everything.</p>
+          <form class="flex gap-4 max-w-md">
+            <input type="email" placeholder="Your email address" class="flex-1 bg-transparent pb-3 focus:outline-none" style="border-bottom:1px solid rgba(250,250,250,0.3); color:#FAF6EE;" />
+            <button type="submit" class="uppercase tracking-widest text-sm font-medium pb-3 hover:text-[#8BAF6A]">Subscribe</button>
+          </form>
+        </div>
+        <!-- Link columns -->
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+          <div class="flex flex-col gap-4 text-sm" style="color:rgba(250,250,250,0.7);">
+            <h4 class="text-white uppercase tracking-widest font-medium mb-2">Shop</h4>
+            <a href="#" class="hover:text-white">Growing Kits</a>
+            <a href="#" class="hover:text-white">Wall Planters</a>
+            <a href="#" class="hover:text-white">Accessories</a>
+            <a href="#" class="hover:text-white">Gift Cards</a>
+          </div>
+          <div class="flex flex-col gap-4 text-sm" style="color:rgba(250,250,250,0.7);">
+            <h4 class="text-white uppercase tracking-widest font-medium mb-2">Learn</h4>
+            <a href="#" class="hover:text-white">Care Library</a>
+            <a href="#" class="hover:text-white">Journal</a>
+            <a href="#" class="hover:text-white">Our Story</a>
+            <a href="#" class="hover:text-white">Sustainability</a>
+          </div>
+          <div class="flex flex-col gap-4 text-sm" style="color:rgba(250,250,250,0.7);">
+            <h4 class="text-white uppercase tracking-widest font-medium mb-2">Support</h4>
+            <a href="#" class="hover:text-white">FAQ</a>
+            <a href="#" class="hover:text-white">Shipping</a>
+            <a href="#" class="hover:text-white">Returns</a>
+            <a href="#" class="hover:text-white">Contact</a>
+          </div>
+        </div>
+      </div>
+      <!-- Bottom bar -->
+      <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t text-xs uppercase tracking-widest" style="border-color:rgba(250,250,250,0.1); color:rgba(250,250,250,0.5);">
+        <p>© 2025 Avergo. All rights reserved.</p>
+        <div class="flex gap-6 mt-4 md:mt-0">
+          <a href="#" class="hover:text-white">Privacy</a>
+          <a href="#" class="hover:text-white">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
